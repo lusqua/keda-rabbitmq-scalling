@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "golang-consumer.name" . }}-{{ .Values.deployConfigs.namespace }}
+  namespace: {{ .Values.deployConfigs.namespace }}
+data:
+  RABBITMQ_HOST: {{ .Values.rabbitScalling.host }}
