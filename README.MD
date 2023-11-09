@@ -56,17 +56,31 @@ kubectl apply -f rabbitmq/rabbitmq-service.yaml
 Then, you need to install the consumer service:
 
 ```bash
-helm upgrade --install golang-consumer helms/golang-consumer --namespace=default --wait
+helm upgrade --install golang-consumer helms/golang-consumer --wait
 ```
 
-Finally, you can put messages in the queue using the port foward or usining the builder service:
+Finally, you can put messages in the queue using the port foward and usining the builder service:
 
 ```bash
 kubectl port-forward svc/rabbitmq 5672:5672
 ```
 
-### IN PROGRESS
+To use the builder service, you need to execute the command regaring your OS with the rabbitmq port foward host:
+
+- Linux:
 
 ```bash
-helm upgrade --install golang-builder helms/golang-builder --namespace=default --wait
+./dist/builder-linux-amd64 amqp://guest:guest@localhost:5672/
+```
+
+- Mac with Intel processor:
+
+```bash
+./dist/builder-darwin-amd64 amqp://guest:guest@localhost:5672/
+```
+
+- Mac with M... (arm) processor:
+
+```bash
+./dist/builder-darwin-arm64 amqp://guest:guest@localhost:5672/
 ```
